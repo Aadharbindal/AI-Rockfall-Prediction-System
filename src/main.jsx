@@ -11,7 +11,7 @@ library.add(faUserCircle, faCaretDown)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router>
+    <Router basename="/SIH">
       <App />
     </Router>
   </StrictMode>,
