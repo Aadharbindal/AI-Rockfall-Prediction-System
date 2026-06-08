@@ -11,7 +11,7 @@ library.add(faUserCircle, faCaretDown)
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router basename="/SIH">
+    <Router basename={import.meta.env.BASE_URL}>
       <App />
     </Router>
   </StrictMode>,
