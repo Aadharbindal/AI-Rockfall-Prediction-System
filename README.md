@@ -1,14 +1,20 @@
-# 🏔️ MineSafe: AI-Powered Slope Stability & Geotechnical Intelligence Platform
+<div align="center">
+  <h1>🏔️ MineSafe</h1>
+  <p><b>AI-Powered Geotechnical Stability & Rockfall Intelligence</b></p>
+  <p><i>"Bridging Physics and Machine Learning to Protect Lives Under the Earth"</i></p>
 
-> *“Bridging Physics and Machine Learning to Protect Lives Under the Earth”*
+  <p>
+    <img src="https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black&style=for-the-badge" alt="React" />
+    <img src="https://img.shields.io/badge/Vite-7.0-646CFF?logo=vite&logoColor=white&style=for-the-badge" alt="Vite" />
+    <img src="https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white&style=for-the-badge" alt="Python" />
+    <img src="https://img.shields.io/badge/Flask-3.0-000000?logo=flask&logoColor=white&style=for-the-badge" alt="Flask" />
+    <img src="https://img.shields.io/badge/Express-5.0-000000?logo=express&logoColor=white&style=for-the-badge" alt="Express" />
+    <img src="https://img.shields.io/badge/Pandas-2.0-150458?logo=pandas&logoColor=white&style=for-the-badge" alt="Pandas" />
+    <img src="https://img.shields.io/badge/Scikit--Learn-1.3-F7931E?logo=scikit-learn&logoColor=white&style=for-the-badge" alt="Scikit-Learn" />
+  </p>
+</div>
 
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black&style=for-the-badge)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-7.0-646CFF?logo=vite&logoColor=white&style=for-the-badge)](https://vite.dev/)
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white&style=for-the-badge)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0-000000?logo=flask&logoColor=white&style=for-the-badge)](https://flask.palletsprojects.com/)
-[![Express](https://img.shields.io/badge/Express-5.0-000000?logo=express&logoColor=white&style=for-the-badge)](https://expressjs.com/)
-[![Pandas](https://img.shields.io/badge/Pandas-2.0-150458?logo=pandas&logoColor=white&style=for-the-badge)](https://pandas.pydata.org/)
-[![Scikit--Learn](https://img.shields.io/badge/Scikit--Learn-1.3-F7931E?logo=scikit-learn&logoColor=white&style=for-the-badge)](https://scikit-learn.org/)
+<br />
 
 **MineSafe** is an enterprise-grade Geotechnical Slope Stability Monitoring & Early Warning System designed for open-cast mines. In remote mines, internet connectivity is scarce and lives depend on zero-latency local calculations. MineSafe integrates real-time IoT telemetry, machine learning predictions, and physics-based engineering calculations into a high-performance offline-first dashboard.
 
