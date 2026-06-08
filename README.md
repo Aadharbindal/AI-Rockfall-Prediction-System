@@ -1,7 +1,6 @@
 <div align="center">
   <h1>🏔️ MineSafe</h1>
-  <p><b>AI-Powered Geotechnical Stability & Rockfall Intelligence</b></p>
-  <p><i>"Bridging Physics and Machine Learning to Protect Lives Under the Earth"</i></p>
+  <p><b>Real-Time Geotechnical Slope Stability Monitoring & Early Warning System</b></p>
 
   <p>
     <img src="https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black&style=for-the-badge" alt="React" />
@@ -16,13 +15,13 @@
 
 <br />
 
-**MineSafe** is an enterprise-grade Geotechnical Slope Stability Monitoring & Early Warning System designed for open-cast mines. In remote mines, internet connectivity is scarce and lives depend on zero-latency local calculations. MineSafe integrates real-time IoT telemetry, machine learning predictions, and physics-based engineering calculations into a high-performance offline-first dashboard.
+**MineSafe** is a real-time Geotechnical Slope Stability Monitoring & Early Warning System designed for open-cast mining environments. It integrates real-time telemetry processing, machine learning-driven risk modeling, and physics-based stability engines to deliver instant warning alerts in critical safety environments where zero-latency execution and offline-first capabilities are essential.
 
 ---
 
-## ⚡ Core Engineering Philosophy: Hybrid AI + Physics
+## ⚙️ Hybrid Stability Engine: Machine Learning + Physics-Based Modeling
 
-Typical machine learning models operate as "black boxes" which safety managers can be hesitant to trust. MineSafe solves this by implementing a **Hybrid AI + Physics Architecture**:
+Relying solely on predictive machine learning models in safety-critical environments can introduce uncertainty. To address this, MineSafe implements a dual-validation engine combining empirical data modeling with analytical geotechnical physics:
 
 ```
  ┌────────────────────────────────────────────────────────┐
@@ -48,44 +47,44 @@ Typical machine learning models operate as "black boxes" which safety managers c
              └────────────────────────────────┘
 ```
 
-1. **Machine Learning Pipeline**: Random Forest Regressors predict the **Rockfall Probability (%)** and **Estimated Time-to-Impact (hours)** based on geological features.
-2. **Physics-Based Engine**: Calculates the **Factor of Safety (FS)** using the Limit Equilibrium Method (LEM). An $FS < 1.0$ indicates physical instability, while $FS \ge 1.5$ indicates a fully stable slope.
-3. **AI vs. LEM Trust Score**: A dynamic heuristic compares the AI's predictions with the physics calculations. If the AI predicts high risk while the physics engine indicates stable geology, the system flags a discrepancy and adjusts the **Trust Score (%)**, ensuring safety managers have reliable warnings.
+1. **Machine Learning Pipeline**: An ensemble of Random Forest Regressors trained on telemetry and geologic parameters predicts the **Failure Probability (%)** and estimated **Time-to-Impact (Hours)**.
+2. **Physics-Based Geotechnical Engine**: Implements the Limit Equilibrium Method (LEM) to compute the **Factor of Safety (FS)** of the slope. An $FS < 1.0$ indicates a critical state of failure, while $FS \ge 1.5$ indicates standard operating stability.
+3. **Dynamic Trust Evaluator**: A correlation engine maps the empirical predictions of the ML model against the physical boundaries calculated by the LEM. If a deviation occurs (e.g., the ML model flags a high-probability event but physics indicates stable structural conditions), the system surfaces a telemetry warning and adjusts the **Geotechnical Trust Score (%)** to alert safety personnel of sensor anomalies.
 
 ---
 
-## 🚀 Interactive UI Modules Walkthrough
+## 🖥️ Application Features & Modules
 
-The frontend is divided into specialized workspaces for different mining safety duties:
+The platform is structured into specialized modules to support standard mining safety workflows:
 
-### 1. 📊 Telemetry Dashboard (HUD)
-- **Mine Risk Visualization**: Dynamic SVG map of India highlighting major mining hubs (Jharkhand, West Bengal, Odisha) colored by real-time risk severity.
-- **PPV Ground Vibration Charts**: Visualizes Peak Particle Velocity (PPV) blasting logs in real time.
-- **KPI Summary HUD**: Live counters of active sensors, active alerts, and site status indicators.
+### 1. Telemetry Dashboard (HUD)
+- **Geographic Risk Heatmap**: An interactive SVG visualization rendering regional mining hubs colored by active geological risk severity.
+- **Ground Vibration Analysis**: Real-time rendering of Peak Particle Velocity (PPV) blasting logs.
+- **Sensor Status & KPI Hub**: Centralized monitoring of active telemetry channels, warning states, and critical system alerts.
 
-### 2. 🎛️ Live Sensors Page
-- **Multi-Sensor Telemetry**: Visual tracking of key variables: Strain, Temperature, Rainfall, Pore Pressure, Slope Angle, and Vibrations.
-- **Real-Time Safety Thresholding**: Color-coded warnings (Success, Warning, Error) flag variables exceeding physical limits:
-  - **Strain limit**: $75\mu\epsilon$ (micro-strain)
-  - **Rainfall limit**: $100\text{mm}$ (accumulated 24h)
-  - **Slope Angle limit**: $60^\circ$ (steepness)
-  - **Pore Pressure limit**: $50\text{kPa}$
-  - **Vibration limit**: $1.0\text{mm/s}$ (blasting tremor)
+### 2. Live Sensors Telemetry
+- **Geotechnical Sensor Array**: Real-time telemetry monitoring for Strain, Temperature, Rainfall, Pore Pressure, Slope Inclinometers, and Ground Vibrations.
+- **Dynamic Threshold Evaluation**: Custom alert triggers that flag sensor values violating critical operating limits:
+  - **Strain limit**: $75\,\mu\epsilon$ (Micro-strain displacement)
+  - **Rainfall limit**: $100\,\text{mm}$ (Accumulated 24-hour precipitation)
+  - **Slope Inclinometer**: $60^\circ$ (Slope face angle)
+  - **Pore Water Pressure**: $50\,\text{kPa}$
+  - **Ground Vibration**: $1.0\,\text{mm/s}$ (Blasting tremor limit)
 
-### 3. 🚨 Alerts Control Center
-- **Alert Logs**: Filterable log of safety incidents (High, Medium, and Low severity) with sorting options by Timestamp, Severity, and Location.
-- **Interactive Details Page**: In-depth view of why an alert was triggered, listing variables that exceeded thresholds.
-- **Operational Triggers**: Direct controls to "Acknowledge Warning", "Export Incident logs", or "Trigger On-Site Evacuation Sirens" in emergencies.
+### 3. Alerts & Incident Control
+- **Consolidated Log Viewer**: High, Medium, and Low severity events with sorting and filtering options by Timestamp, Severity, and Source.
+- **Trigger Auditing**: Granular failure analysis explaining the exact parameter threshold crossings that triggered the safety incident.
+- **Incident Mitigation Controls**: Direct interfaces for safety operators to acknowledge alarms, export incident logs, or simulate on-site emergency procedures.
 
-### 4. 🔮 Inference Center (Prediction & Report Engine)
-- **Manual Input Geotechnical Interface**: Paste raw comma-separated values to request instant predictions from the Flask ML server.
-- **Automated PDF Auditing**: A built-in reporting layout compiles current weather data, live telemetry metrics, coordinates, and ML results, exporting a formatted PDF audit report in a single click (powered by `html2canvas` and `jspdf`).
+### 4. Predictive Inference & Automated Auditing
+- **On-Demand Inference**: Manual parameter input terminal to query the local Flask ML service for instant stability forecasting.
+- **One-Click Audit Exporter**: Generates highly formatted PDF reports documenting active telemetry states, weather parameters, coordinates, and ML results directly from client-side DOM components using `html2canvas` and `jsPDF`.
 
-### 5. 🔬 What-If Scenario Simulator
-- Allows safety experts to virtually test extreme conditions and triggers without real-world risks:
-  - **Rainfall Scenario**: Simulates precipitation amount (mm) and duration (hours), modeling impacts on soil moisture and slope stability.
-  - **Blasting Scenario**: Simulates proximity (meters) and charge size (kg TNT equivalent) of mine blasting operations.
-  - **Temperature Scenario**: Simulates extreme cold and rapid thaw cycles (°C) to evaluate freeze-thaw expansions on rock joints.
+### 5. What-If Geotechnical Simulator
+Enables engineering personnel to simulate the stability impact of extreme environmental and operational events:
+- **Precipitation Simulation**: Evaluates the impact of varying rainfall volumes and duration on soil saturation levels and pore-water pressure.
+- **Blasting Simulation**: Models shear stress degradation and dynamic acceleration based on charge weight (kg TNT equivalent) and proximity.
+- **Thermal Cycle Simulation**: Models freeze-thaw cycles (°C) to evaluate volumetric expansion stresses on jointed rock mass.
 
 ---
 
@@ -97,7 +96,7 @@ Here is the data structure utilized by our inference models and physics calculat
 | :--- | :--- | :--- | :--- |
 | **Rock_Type** | Categorical | Geology Database | Determines baseline cohesion and internal friction angle (Igneous, Metamorphic, Sedimentary). |
 | **Rainfall** | mm / 24 hours | Live Piezometer / Weather | Controls pore-water pressure, reducing effective stress in joint planes. |
-| **Slope_Angle** | Degrees (°) | Digital Inclinometers | Higher angle values increase shear stress on the failure plane. |
+| **Slope_Angle** | Degrees (°) | Inclinometers | Higher angle values increase shear stress on the failure plane. |
 | **NDVI** | -1.0 to 1.0 | Sentinel-2 Satellite | Normalized Difference Vegetation Index: measures slope vegetation cover. |
 | **Change_in_NDVI** | Delta ($\Delta$) | Satellite Epoch Comparison | Negative delta flags active surface erosion or rock movement. |
 | **Soil_Moisture** | Percentage (%) | TDR Moisture Probes | Correlates with soil shear strength degradation. |
@@ -106,31 +105,28 @@ Here is the data structure utilized by our inference models and physics calculat
 
 ---
 
-## 🧠 Machine Learning & Data Pipeline Details
+## 🧠 Data Pipeline & Machine Learning Implementation
 
-### 1. Model Selection & Pipelines
-- The model uses two **Random Forest Regressors** (`sklearn.ensemble.RandomForestRegressor`):
-  - **Probability Pipeline**: Forecasts slope failure probability (0.0 to 1.0).
-  - **Time-to-Impact Pipeline**: Forecasts remaining time before a rockfall occurs (in hours).
-- **ColumnTransformer Preprocessor**:
-  - **Numerical columns** are scaled using `StandardScaler` to handle features with differing units (e.g., Rainfall vs. Slope Angle).
-  - **Categorical columns** (`Rock_Type`) are encoded using `OneHotEncoder` to convert geological labels into numeric features.
+### 1. Model Structure & Feature Processing
+- **Predictive Models**: Built using Scikit-Learn ensemble estimators (`sklearn.ensemble.RandomForestRegressor`) to model the highly non-linear relationship between geological telemetry and slope failure.
+  - **Probability Pipeline**: Forecasts slope failure probability (scaled from `0.0` to `1.0`).
+  - **Time-to-Impact Pipeline**: Estimates the time window preceding structural failure (in hours).
+- **Preprocessing Pipelines**: Configured via `ColumnTransformer` to guarantee zero data leakage:
+  - **Numerical Features**: Scaled via `StandardScaler` to handle multi-unit sensors.
+  - **Categorical Features**: Encoded using `OneHotEncoder` to handle discrete geological rock classifications.
 
 ### 2. Local Excel Database Persistence
-- In remote mine environments, external database servers can go offline. MineSafe uses an **Excel-based Local database** (`data/users.xlsx`):
-  - **Password Security**: Passwords are encrypted on the backend using the secure `scrypt` hashing algorithm with custom salt protection before storage.
-  - **Robust Serializer Handlers**: Implements custom pandas DataFrame-to-Dictionary translators to convert `NaN` float values to JSON-compatible `None`/`null` objects, preventing client-side parsing failures.
+- **Offline Security**: Implements a local Excel-based ledger (`data/users.xlsx`) as a lightweight credential store. Passwords are encrypted on the backend using the secure `scrypt` hashing algorithm with custom salt protection before storage.
+- **Robust Serializer Handlers**: Implements custom pandas DataFrame-to-Dictionary translators to convert `NaN` float values to JSON-compatible `None`/`null` objects, preventing client-side parsing failures.
 
 ---
 
-## 🛠️ Software Design Showcase (For Recruiters)
+## 🏗️ Architectural Design & Implementation Details
 
-This repository demonstrates several clean coding patterns and engineering best practices:
-
-- **Isolated API State Handlers**: State changes, API fetch states, and UI rendering logic are fully isolated to prevent React component rendering crashes from masking network exceptions.
-- **Stable Loopback Configuration**: Configured to use explicit IPv4 loopback (`127.0.0.1`) addressing rather than `localhost` to bypass IPv6 resolution discrepancies common on Windows workstations.
-- **Offline-First Security**: Hybrid auth that secures accounts with standard backend crypt-hashing and falls back to a highly portable spreadsheet database.
-- **Custom PDF Engine**: Combines `html2canvas` and `jspdf` to convert DOM states into high-resolution documents, bypassing heavy server-side print servers.
+- **Asynchronous Telemetry Isolation**: React UI state rendering is decoupled from the asynchronous telemetry polling and ML inference cycles. This prevents backend network delays or transient API exceptions from degrading frontend responsiveness or triggering runtime crashes.
+- **Dual-Stack DNS Bypass**: Configured using explicit IPv4 loopback (`127.0.0.1`) addressing rather than the `localhost` hostname. This guarantees stable local networking and prevents cross-platform dual-stack DNS resolution lag common on Windows host systems.
+- **Portable Offline-First Ledger**: Employs a lightweight, file-based workbook ledger (`data/users.xlsx`) for system access credentials. This eliminates the database installation footprint in disconnected field setups while ensuring security through salted `scrypt` password hashing.
+- **Direct Client-Side Document Compiling**: Dynamically translates the DOM tree into high-fidelity PDF documents utilizing `html2canvas` and `jsPDF`. This reduces server-side processing overhead and eliminates the need for remote headless print servers.
 
 ---
 
@@ -173,4 +169,10 @@ cd ..
 npm run dev
 ```
 
-Navigate to: **[http://localhost:5173/SIH/](http://localhost:5173/SIH/)**
+---
+
+## 🌐 Production Deployment
+
+The production build of the dashboard is deployed and accessible live at:
+
+👉 **[https://aadharbindal.github.io/AI-Rockfall-Prediction-System/](https://aadharbindal.github.io/AI-Rockfall-Prediction-System/)**
