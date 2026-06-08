@@ -33,44 +33,52 @@ const SignupPage = ({ onSignupSuccess, onClose }) => {
             return;
         }
 
+        let success = false;
+        let successMessage = '';
+        let apiError = '';
+
         try {
-            // Check if user already exists in local storage
-            const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-            const userExists = existingUsers.some(user => user.email === email);
+            const response = await fetch('http://127.0.0.1:5000/api/signup-excel', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    password,
+                    userRole,
+                    mineLocation,
+                    phoneNumber,
+                    latitude,
+                    longitude,
+                }),
+            });
 
-            if (userExists) {
-                setMessage('Email already registered. Please log in or use a different email.');
-                setIsSuccess(false);
-                setIsLoading(false);
-                return;
+            const data = await response.json();
+
+            if (response.ok) {
+                success = true;
+                successMessage = data.message || 'Signup successful! You can now log in.';
+            } else {
+                apiError = data.error || 'Signup failed. Please try again.';
             }
-
-            // Store user data in local storage
-            const newUser = {
-                fullName,
-                email,
-                password, // In a real app, hash this password before storing locally or sending to a backend
-                userRole,
-                mineLocation,
-                phoneNumber,
-                latitude,
-                longitude,
-                // idProof is typically uploaded to a server, not stored in local storage
-            };
-
-            const updatedUsers = [...existingUsers, newUser];
-            localStorage.setItem('users', JSON.stringify(updatedUsers));
-
-            setMessage('Signup successful! You can now log in.');
-            setIsSuccess(true);
-            onSignupSuccess(); // Notify parent component of successful signup
-
         } catch (err) {
             console.error('Error during signup:', err);
-            setMessage('An unexpected error occurred during signup. Please try again.');
-            setIsSuccess(false); // Ensure success is false on error
+            apiError = 'Cannot connect to authentication service. Please make sure the server is running.';
         } finally {
             setIsLoading(false);
+        }
+
+        if (success) {
+            setMessage(successMessage);
+            setIsSuccess(true);
+            setTimeout(() => {
+                onSignupSuccess();
+            }, 1500);
+        } else if (apiError) {
+            setMessage(apiError);
+            setIsSuccess(false);
         }
     };
     
@@ -192,8 +200,11 @@ const SignupPage = ({ onSignupSuccess, onClose }) => {
                                 required
                             >
                                 <option value="">Select your role</option>
-                                <option value="admin">Safety Manager</option>
-                                
+                                <option value="safety_manager">Safety Manager</option>
+                                <option value="geotech_engineer">Geotechnical Specialist</option>
+                                <option value="site_engineer">Site Engineer</option>
+                                <option value="mine_surveyor">Mine Surveyor</option>
+                                <option value="mine_manager">Mine Manager</option>
                             </select>
                             <i className="fas fa-chevron-down"></i>
                         </div>

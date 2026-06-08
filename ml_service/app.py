@@ -25,7 +25,21 @@ USER_DATA_FILE = 'data/users.xlsx' # Updated path
 def load_users():
     if os.path.exists(USER_DATA_FILE):
         try:
-            return pd.read_excel(USER_DATA_FILE).to_dict(orient='records')
+            import math
+            df = pd.read_excel(USER_DATA_FILE)
+            users_list = df.to_dict(orient='records')
+            
+            # Convert float nan values to None so they serialize to standard JSON null
+            cleaned_users = []
+            for user in users_list:
+                cleaned_user = {}
+                for k, v in user.items():
+                    if isinstance(v, float) and math.isnan(v):
+                        cleaned_user[k] = None
+                    else:
+                        cleaned_user[k] = v
+                cleaned_users.append(cleaned_user)
+            return cleaned_users
         except Exception as e:
             print(f"Error reading Excel file: {e}")
             return []
@@ -34,6 +48,7 @@ def load_users():
 # Function to save user data to Excel
 def save_users(users_list):
     try:
+        os.makedirs(os.path.dirname(USER_DATA_FILE), exist_ok=True)
         df = pd.DataFrame(users_list)
         df.to_excel(USER_DATA_FILE, index=False)
     except Exception as e:
@@ -163,9 +178,9 @@ def login_excel():
     user = next((u for u in users if u['email'] == email), None)
 
     if user and check_password_hash(user['password'], password):
-        # For this local storage approach, we'll just return basic user info
-        # In a real app, you'd issue a JWT or a session token
-        return jsonify({'message': 'Login successful', 'user': {'email': user['email'], 'userRole': user['userRole']}}), 200
+        # Return full user profile (excluding password)
+        user_info = {k: v for k, v in user.items() if k != 'password'}
+        return jsonify({'message': 'Login successful', 'user': user_info}), 200
     else:
         return jsonify({'error': 'Invalid email or password'}), 401
 

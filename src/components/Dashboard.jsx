@@ -16,6 +16,15 @@ const Dashboard = ({ isLoggedIn, handleLoginClick, handleSignupClick, handleLogo
   const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
   const [showGroundVibrationDetail, setShowGroundVibrationDetail] = useState(false); // New state for detail page
 
+  const loggedInUser = (() => {
+    try {
+      return isLoggedIn ? JSON.parse(localStorage.getItem('loggedInUser')) : null;
+    } catch (e) {
+      console.error("Error parsing loggedInUser from localStorage", e);
+      return null;
+    }
+  })();
+
   useEffect(() => {
     const closeDropdown = () => setShowNotificationsDropdown(false);
     window.addEventListener('closeDashboardDropdown', closeDropdown);
@@ -66,7 +75,10 @@ const Dashboard = ({ isLoggedIn, handleLoginClick, handleSignupClick, handleLogo
         <div className="auth-container">
           {isLoggedIn ? (
             <div className="user-profile-container">
-              <div className="user-icon">
+              {loggedInUser && (
+                <span className="user-greeting">Hi, {loggedInUser.fullName || 'User'}</span>
+              )}
+              <div className="user-icon" onClick={toggleNotificationsDropdown}>
                 <FontAwesomeIcon icon={faUserCircle} />
               </div>
               <div className="notification-arrow" onClick={toggleNotificationsDropdown}>
@@ -74,6 +86,17 @@ const Dashboard = ({ isLoggedIn, handleLoginClick, handleSignupClick, handleLogo
               </div>
               {showNotificationsDropdown && (
                 <div className={`notification-dropdown ${showNotificationsDropdown ? 'show' : ''}`}> {/* Apply 'show' class conditionally */}
+                  {loggedInUser && (
+                    <div className="dropdown-profile-info">
+                      <div className="profile-name">{loggedInUser.fullName || 'User'}</div>
+                      <div className="profile-email">{loggedInUser.email}</div>
+                      <div className="profile-role">
+                        Role: {loggedInUser.userRole ? loggedInUser.userRole.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'N/A'}
+                      </div>
+                      <div className="profile-location">Site: {loggedInUser.mineLocation || 'N/A'}</div>
+                    </div>
+                  )}
+                  <hr className="dropdown-divider" />
                   <div className="dropdown-item">Notifications</div>
                   <div className="dropdown-item" onClick={handleLogout}>Sign-out</div>
                 </div>

@@ -15,20 +15,37 @@ const LoginPage = ({ onLoginSuccess, onClose }) => {
     e.preventDefault();
     setError('');
 
-    try {
-      const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-      const user = existingUsers.find(u => u.email === email && u.password === password);
+    let success = false;
+    let userProfile = null;
+    let apiError = '';
 
-      if (user) {
-        // Store logged-in user info (e.g., email, role) in session storage or local storage
-        localStorage.setItem('loggedInUser', JSON.stringify({ email: user.email, role: user.userRole }));
-        onLoginSuccess();
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/login-excel', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        success = true;
+        userProfile = data.user;
       } else {
-        setError('Invalid email or password.');
+        apiError = data.error || 'Invalid email or password.';
       }
     } catch (err) {
       console.error('Error during login:', err);
-      setError('An unexpected error occurred during login. Please try again.');
+      apiError = 'Cannot connect to authentication service. Please make sure the server is running.';
+    }
+
+    if (success && userProfile) {
+      localStorage.setItem('loggedInUser', JSON.stringify(userProfile));
+      onLoginSuccess();
+    } else if (apiError) {
+      setError(apiError);
     }
   };
 

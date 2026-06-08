@@ -47,7 +47,7 @@ function App() {
   const handleSignupSuccess = () => {
     setShowSignupPage(false); // Close signup page after successful signup
     setSignupMessage('You have successfully signed up! Please log in.'); // Set success message
-    // We don't open LoginPage immediately; user can choose when to log in.
+    setShowLoginPage(true); // Automatically open login page
   };
 
   const handleLogout = () => {
